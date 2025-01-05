@@ -124,8 +124,8 @@ class Utilits {
         document.getElementsByTagName('head')[priority].appendChild(Style);
     }
 }
-let utilits = new Utilits()
-utilits.debug = true;
+export var utilits = new Utilits()
+// utilits.debug = true;
 
-let str = "Русская рулетка"
-console.log("utilits.translit(str) ",utilits.translit(str))
+// let str = "Русская рулетка"
+// console.log("utilits.translit(str) ",utilits.translit(str))
