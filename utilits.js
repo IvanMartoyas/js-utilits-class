@@ -123,9 +123,61 @@ class Utilits {
         }
         document.getElementsByTagName('head')[priority].appendChild(Style);
     }
+
+   
+    findStringInArray(array, _string, nameFild) {
+        /**
+         * 1 array - масив в котором ищу
+         * 2 _string - строка по которой ищу
+         * 3 nameFild имя поля в котором надо искать
+         */
+        let newFindArray = [];
+        array.findIndex(element => {
+            // toLowerCase убирает чувствительность к регистрку
+            if(element[nameFild].toLowerCase().includes(_string.toLowerCase())) {
+                newFindArray.push(element)
+            }
+        })
+
+        return newFindArray;
+    }
+
+    toBase64InFile(_input_file_id, prevuew_img) {
+         // кодирует изображение из file в base64
+        // _input_file_id  принимает id input file c которого достаю изображение
+        // prevuew_img (не обязательный) если нужно сделать превью после загрузки то указываю id c img куда отобразиться картнка
+
+        document.getElementById(_input_file_id).onchange = event => {
+            let reader = new FileReader();
+
+            if(prevuew_img) {
+                reader.onload = e => document.getElementById(prevuew_img).src = e.target.result;
+            }
+
+            return reader.readAsDataURL(event.target.files[0]);
+            // console.log("render ",reader);
+             
+        }
+    }
+
+    toBase64InFileV2(img) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+        });
+
+        let reader = new FileReader();
+
+        return reader.readAsDataURL(img);
+    }
+
 }
 export var utilits = new Utilits()
 // utilits.debug = true;
 
 // let str = "Русская рулетка"
 // console.log("utilits.translit(str) ",utilits.translit(str))
+
+
